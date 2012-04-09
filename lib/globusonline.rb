@@ -22,7 +22,7 @@ module GlobusOnline
             :verify_ssl => ::OpenSSL::SSL::VERIFY_PEER)
       elsif saml_cookie then
           RestClient::Resource.new(URL,
-            :headers => {cookie: "saml=\"#{saml_cookie}\""},
+            :headers => {cookies: {saml: saml_cookie}},
             :ssl_ca_file => ca_file,
             :verify_ssl => ::OpenSSL::SSL::VERIFY_PEER)
       end
