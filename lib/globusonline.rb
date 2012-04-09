@@ -1,6 +1,8 @@
 require "rest_client"
 require "openssl"
 
+require "globusonline/authenticate"
+
 module GlobusOnline
   URL = "https://transfer.api.globusonline.org/v0.10"
   class API
@@ -38,10 +40,6 @@ module GlobusOnline
       rescue RestClient::Exception
         super
       end
-    end
-
-    private 
-    def authenticate(username, password)
     end
   end
 end
