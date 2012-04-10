@@ -5,7 +5,6 @@ require 'json'
 class ApiTest < Test::Unit::TestCase
 
   def test_cookie_or_cerficate_exclusivity
-    skip
     exp = assert_raise RuntimeError do
       api = GlobusOnline::API.new(:user => "someuser",
                                   cert_file: "somefile.pem",
@@ -46,6 +45,7 @@ class ApiTest < Test::Unit::TestCase
     api = GlobusOnline::API.new(:user => ENV["USER"], cert_file: cert_file,
                                 key_file: key_file, ca_file: ca_file)
     res = api["/tasksummary"].get
+    assert_equal "tasksummary", JSON.parse(res)["DATA_TYPE"]
   end
 
 end
