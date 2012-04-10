@@ -36,7 +36,7 @@ module GlobusOnline
 
     def method_missing(method_sym, *args, &block)
       begin
-        @resource[method_sym.to_s].get
+        @resource["/#{method_sym.to_s}"].get
       rescue RestClient::Exception
         super
       end

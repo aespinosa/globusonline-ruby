@@ -48,5 +48,16 @@ class ApiTest < Test::Unit::TestCase
     assert_equal "tasksummary", JSON.parse(res)["DATA_TYPE"]
   end
 
+  def test_using_metaprogramming_method
+    cert_file = "#{ENV["HOME"]}/.globus/usercert.pem"
+    key_file = "#{ENV["HOME"]}/.globus/userkey.pem"
+    skip "No globus user certificates found" if not File.exists? cert_file
+    skip "No globus private keys found" if not File.exists? cert_file
+    ca_file = "#{ENV["HOME"]}/.globus/certificates/gd-bundle_ca.cert"
+    api = GlobusOnline::API.new(:user => ENV["USER"], cert_file: cert_file,
+                                key_file: key_file, ca_file: ca_file)
+    res = api.tasksummary
+    assert_equal "tasksummary", JSON.parse(res)["DATA_TYPE"]
+  end
 end
 
